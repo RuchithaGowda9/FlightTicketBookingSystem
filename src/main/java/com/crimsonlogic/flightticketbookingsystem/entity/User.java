@@ -48,7 +48,4 @@ public class User {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private List<Booking> bookings;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private List<Payment> payments;
-
 }

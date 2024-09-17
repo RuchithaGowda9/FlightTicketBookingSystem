@@ -4,12 +4,11 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,12 +28,13 @@ public class Payment {
 	@Column(name = "payment_id")
 	private Long paymentId;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
-	private User user;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@ManyToOne
+//	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "user_id_fk"))
+//	private User user;
 
 	@Column(name = "amount", precision = 10, scale = 2)
-	private java.math.BigDecimal amount;
+	private float amount;
 
 	@Column(name = "payment_date")
 	private Timestamp paymentDate = new Timestamp(System.currentTimeMillis());
@@ -42,8 +42,9 @@ public class Payment {
 	@Column(name = "payment_method", length = 50)
 	private String paymentMethod;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "booking_id")
+//	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne
+	@JoinColumn(name = "booking_id", foreignKey = @ForeignKey(name = "booking_id_fk"))
 	private Booking booking;
 
 }

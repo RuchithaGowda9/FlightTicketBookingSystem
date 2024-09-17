@@ -10,7 +10,12 @@ public interface UserService {
 
 	public List<User> listAllUsers();
 
-	public void updateUser(long userId, User user) throws ResourceNotFoundException;
-
 	public User showUserById(long userId);
+
+	void updateUser(long userId, User user) throws ResourceNotFoundException;
+
+	User authenticateUser(String email, String password);
+
+	boolean isUserAdmin(User user);
+
 }

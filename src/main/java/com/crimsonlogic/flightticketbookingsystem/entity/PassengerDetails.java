@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,8 +29,12 @@ public class PassengerDetails {
 	private Long passengerId;
 
 	@ManyToOne
-	@JoinColumn(name = "booking_id")
-	private Booking booking;
+	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "user_id_fk"))
+	private User user;
+
+//	@OneToMany
+//	@JoinColumn(name = "flight_id", foreignKey = @ForeignKey(name = "flight_id_fk"))
+//	private Flight flight;
 
 	@Column(name = "first_name", length = 50)
 	private String firstName;
@@ -42,4 +47,7 @@ public class PassengerDetails {
 
 	@Column(name = "date_of_birth")
 	private Date dateOfBirth;
+
+	@Column(name = "gender")
+	private String gender;
 }

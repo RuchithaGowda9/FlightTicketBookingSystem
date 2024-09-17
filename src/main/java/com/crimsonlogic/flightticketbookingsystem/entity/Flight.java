@@ -49,10 +49,21 @@ public class Flight {
 	@Column(name = "status", length = 50)
 	private String status;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "flight")
-	private List<Seat> seats;
+	@Column(name = "trip_price")
+	private float tripPrice;
 
+	@Column(name = "no_of_seats")
+	private int noOfSeats = 50;
+
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "flight")
+//	private List<Seat> seats;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "flight")
 	private List<Booking> bookings;
 
+	@Override
+	public String toString() {
+		return "Flight{" + "flightId=" + flightId + ", flightNumber='" + flightNumber + '\'' + ", departureTime="
+				+ departureTime + ", arrivalTime=" + arrivalTime + ", status='" + status + '\'' + ", tripPrice="
+				+ tripPrice + '}';
+	}
 }
