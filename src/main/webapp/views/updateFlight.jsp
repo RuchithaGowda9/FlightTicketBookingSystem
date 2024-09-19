@@ -119,7 +119,7 @@ html, body {
     <div id="sidebar" class="sidebar">
         <a href="${pageContext.request.contextPath}/flight/add">Schedule Flight</a>
         <a href="${pageContext.request.contextPath}/flight/viewflights">Manage Flight Schedule</a>
-        <a href="${pageContext.request.contextPath}/user/viewBooking">View Booking</a>
+        <a href="${pageContext.request.contextPath}/bookings/viewbookings">View Booking</a>
     </div>
 
     <!-- Navbar -->

@@ -1,6 +1,8 @@
 package com.crimsonlogic.flightticketbookingsystem.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
@@ -52,6 +56,10 @@ public class Booking {
 	@OneToOne(mappedBy = "booking")
 	private Payment payment;
 
+	@OneToMany(mappedBy = "booking")
+	@BatchSize(size = 10)
+	private List<PassengerDetails> passengerDetails = new ArrayList<>();
+
 	@Override
 	public String toString() {
 		return "Booking{" + "bookingId=" + bookingId + ", seatId='" + seatId + '\'' + ", user="
@@ -60,8 +68,4 @@ public class Booking {
 				+ ", noOfPassengers=" + noOfPassengers + ", status='" + status + '\'' + ", payment="
 				+ (payment != null ? payment.getPaymentId() : "null") + '}';
 	}
-
-//	@OneToMany(mappedBy = "booking")
-//	private List<PassengerDetails> passengerDetails;
-
 }

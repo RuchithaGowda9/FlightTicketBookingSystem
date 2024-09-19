@@ -14,14 +14,12 @@
 html, body {
 	height: 100%;
 	margin: 0;
-	background-color: #ffffff; /* Fallback background color */
+	background-color: #ffffff; 
 	background-image:
 		url('https://assets.newatlas.com/dims4/default/2a36987/2147483647/strip/true/crop/1578x1052+0+14/resize/1200x800!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Farchive%2Fcloud-streamer-2.jpg');
 	background-size: cover;
-	/* Make sure the background image covers the entire body */
-	background-position: center; /* Center the background image */
+	background-position: center; 
 	background-attachment: fixed;
-	/* Keep the background image fixed during scrolling */
 	display: flex;
 	flex-direction: column;
 }
@@ -32,64 +30,60 @@ body {
 }
 
 .navbar {
-	background-color: #2a52be; /* Match navbar color */
-	height: 70px; /* Set navbar height to 70px */
+	background-color: #2a52be; 
+	height: 70px; 
 	display: flex;
-	align-items: center; /* Center items vertically */
+	align-items: center; 
 }
 
 .navbar-brand {
 	display: flex;
-	align-items: center; /* Center items vertically */
+	align-items: center; 
 }
 
 .navbar-brand img {
-	width: 60px; /* Set the logo width */
-	height: 60px; /* Set the logo height */
-	margin-right: 10px; /* Space between logo and text */
+	width: 60px; 
+	height: 60px; 
+	margin-right: 10px; 
 }
 
 .navbar-brand, .nav-link {
 	color: #ffffff;
-	transition: color 0.3s ease; /* Smooth color transition */
+	transition: color 0.3s ease; 
 }
 
 .navbar-brand:hover, .nav-link:hover {
-	color: #0e1f52; /* Change to a darker color on hover */
+	color: #0e1f52; 
 }
 
 .hero-section {
 	background-color: rgba(255, 255, 255, 0.95);
-	/* Slightly transparent background */
-	color: #000000; /* Set text color to black */
-	padding: 40px 20px; /* Padding for the hero section */
+	color: #000000; 
+	padding: 40px 20px; 
 	text-align: center;
-	border-radius: 8px; /* Optional: Adds rounded corners */
+	border-radius: 8px; 
 	max-height: 200px;
-	max-width: 800px; /* Increase max width for a wider card */
+	max-width: 800px; 
 	margin: 110px auto;
-	/* Center the section horizontally and add some top margin */
 	flex: 1;
-	/* Allows the hero section to expand and take available space */
 }
 
 .hero-section h1 {
-	font-size: 2rem; /* Font size for heading */
-	color: #000000; /* Ensure heading color is black */
+	font-size: 2rem; 
+	color: #000000; 
 }
 
 .hero-section p {
-	font-size: 1rem; /* Font size for paragraph */
-	color: #000000; /* Ensure paragraph color is black */
+	font-size: 1rem;
+	color: #000000; 
 }
 
 .btn-primary {
-	background-color: #2a52be; /* Match button color with navbar */
+	background-color: #2a52be; 
 	border-color: #2a52be;
-	font-size: 0.875rem; /* Font size for button */
-	padding: 0.5rem 1rem; /* Padding for button */
+	font-size: 0.875rem; 
+	padding: 0.5rem 1rem; 
 	transition: background-color 0.3s ease, border-color 0.3s ease;
-	/* Smooth color transition */
 }
 
 .btn-primary:hover {
@@ -163,7 +157,8 @@ body {
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/user/home"><i class="fas fa-home"></i> Home</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+				<li class="nav-item"><a class="nav-link" href="#footer"><i class="fas fa-envelope"></i> Contact Us</a></li>
+
 			</ul>
 		</div>
 	</nav>
@@ -175,13 +170,14 @@ body {
 			<p>Your gateway to effortless flight booking.</p>
 			<a href="${pageContext.request.contextPath}/user/login"
 				class="btn btn-primary">Login</a>
+				
 		</div>
 	</section>
 
 	<!-- Footer -->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
+	<footer id="footer" class="footer">
+    <div class="container">
+        <div class="row">
 				<div class="col-md-3">
 					<h5>About Us</h5>
 					<p>We are AeroBook, dedicated to providing seamless flight
@@ -232,7 +228,6 @@ body {
 		</div>
 	</footer>
 
-	<!-- Bootstrap JavaScript and dependencies -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

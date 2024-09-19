@@ -20,8 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crimsonlogic.flightticketbookingsystem.entity.Airport;
 import com.crimsonlogic.flightticketbookingsystem.entity.Flight;
+import com.crimsonlogic.flightticketbookingsystem.entity.PassengerDetails;
+import com.crimsonlogic.flightticketbookingsystem.exception.FlightConflictException;
 import com.crimsonlogic.flightticketbookingsystem.exception.ResourceNotFoundException;
 import com.crimsonlogic.flightticketbookingsystem.service.AirportService;
+import com.crimsonlogic.flightticketbookingsystem.service.BookingService;
 import com.crimsonlogic.flightticketbookingsystem.service.FlightService;
 
 @Controller
@@ -33,6 +36,9 @@ public class FlightController {
 
 	@Autowired
 	private AirportService airportService;
+
+	@Autowired
+	BookingService bookingService;
 
 	private static final Logger LOG = LoggerFactory.getLogger(FlightController.class);
 
@@ -52,7 +58,7 @@ public class FlightController {
 			flightService.addFlight(flightNumber, departureAirportId, arrivalAirportId, departureTime, arrivalTime,
 					status);
 			redirectAttributes.addFlashAttribute("success", "Flight added successfully.");
-		} catch (Exception e) {
+		} catch (FlightConflictException e) {
 			redirectAttributes.addFlashAttribute("error", e.getMessage());
 		}
 
@@ -138,4 +144,12 @@ public class FlightController {
 		model.addAttribute("flights", flights);
 		return "flightsbyairport";
 	}
+
+	@GetMapping("/passengers/{flightId}")
+	public String viewPassengers(@PathVariable Long flightId, Model model) {
+		List<PassengerDetails> passengers = bookingService.getPassengersByFlightId(flightId);
+		model.addAttribute("passengers", passengers);
+		return "passengerList";
+	}
+
 }

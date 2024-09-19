@@ -12,22 +12,22 @@
         html, body {
             height: 100%;
             margin: 0;
-            background-color: #ffffff; /* Fallback background color */
+            background-color: #ffffff; 
             background-image: url('https://assets.newatlas.com/dims4/default/2a36987/2147483647/strip/true/crop/1578x1052+0+14/resize/1200x800!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Farchive%2Fcloud-streamer-2.jpg');
-            background-size: cover; /* Make sure the background image covers the entire body */
-            background-position: center; /* Center the background image */
-            background-attachment: fixed; /* Keep the background image fixed during scrolling */
+            background-size: cover;
+            background-position: center; 
+            background-attachment: fixed; 
             display: flex;
             flex-direction: column;
         }
         .login-card {
-            background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque white background */
-            border-radius: 12px; /* Rounded corners for the card */
-            padding: 40px; /* Increased padding for a more spacious look */
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-radius: 12px; 
+            padding: 40px; 
             width: 100%;
-            max-width: 400px; /* Set max-width to make the card responsive */
+            max-width: 400px; 
             margin: 20px auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for better depth effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
         }
         .alert {
             margin-top: 20px;
@@ -38,85 +38,85 @@
             margin-left: 5px;
         }
         .navbar {
-            background-color: #2a52be; /* Match navbar color */
-            height: 70px; /* Set navbar height to be fixed */
-            line-height: 70px; /* Vertically center text */
-            padding: 0 15px; /* Adjust padding for consistent spacing */
+            background-color: #2a52be; 
+            height: 70px; 
+            line-height: 70px; 
+            padding: 0 15px; 
             display: flex;
-            align-items: center; /* Center items vertically */
-            position: fixed; /* Fixed position to stay at the top */
-            width: 100%; /* Ensure navbar spans the full width */
-            top: 0; /* Stick to the top */
-            left: 0; /* Stick to the left */
-            z-index: 1000; /* Ensure it's above other content */
+            align-items: center; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            left: 0; 
+            z-index: 1000;
         }
         .navbar-brand, .nav-link {
             color: #ffffff;
-            transition: color 0.3s ease; /* Smooth color transition */
+            transition: color 0.3s ease; 
         }
         .navbar-brand:hover, .nav-link:hover {
-            color: #0e1f52; /* Change to a darker color on hover */
+            color: #0e1f52; 
         }
         .nav-link {
-            padding: 10px 15px; /* Add padding for clickable area */
-            border-radius: 4px; /* Round corners */
-            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color and text color */
+            padding: 10px 15px; 
+            border-radius: 4px; 
+            transition: background-color 0.3s ease, color 0.3s ease; 
         }
         .nav-link:hover {
-            background-color: #1a3e7a; /* Darker blue for hover effect */
-            color: #ffffff; /* White text color on hover */
+            background-color: #1a3e7a; 
+            color: #ffffff;
         }
         .btn-primary {
-            background-color: #2a52be; /* Match button color with navbar */
-            border: none; /* Remove border */
-            font-size: 16px; /* Slightly larger font size for the button */
+            background-color: #2a52be; 
+            border: none; 
+            font-size: 16px; 
         }
         .btn-primary:hover {
-            background-color: #1a3e7a; /* Darker blue for button hover effect */
-            color: #ffffff; /* White text color on hover */
+            background-color: #1a3e7a; 
+            color: #ffffff;
         }
         .footer {
-            background-color: #4a535e; /* Subtle greyish-blue color for footer */
-            color: #ffffff; /* White text color for better visibility */
+            background-color: #4a535e; 
+            color: #ffffff; 
             padding: 20px 0;
             text-align: center;
-            margin-top: auto; /* Push the footer to the bottom */
+            margin-top: auto; 
         }
         .body-content {
-            margin-top: 70px; /* Adjust top margin to prevent overlap with the navbar */
+            margin-top: 70px; 
             flex: 1;
         }
         .register-link {
-            color: #2a52be; /* Match link color with navbar */
-            text-decoration: none; /* Remove underline */
-            font-weight: bold; /* Make the link bold */
+            color: #2a52be; 
+            text-decoration: none;
+            font-weight: bold; 
         }
         .register-link:hover {
-            color: #0e1f52; /* Darker blue for hover effect */
+            color: #0e1f52; 
         }
         .error-message {
-            color: red; /* Red color for error messages */
-            font-size: 0.875em; /* Slightly smaller font size for error messages */
-            margin-top: 10px; /* Space above the error message */
+            color: red; 
+            font-size: 0.875em; 
+            margin-top: 10px; 
         }
         .form-group {
-            position: relative; /* Position relative to use absolute positioning for icons */
+            position: relative; 
         }
         .form-group .form-control {
-            padding-left: 40px; /* Add space for icons inside input fields */
+            padding-left: 40px; 
         }
         .form-group .form-control-icon {
             position: absolute;
-            left: 10px; /* Position icon to the left inside input field */
+            left: 10px; 
             top: 50%;
             transform: translateY(-50%);
-            color: #6c757d; /* Light color for the icon */
+            color: #6c757d; 
         }
         .form-group label {
-            font-weight: bold; /* Bold labels for better visibility */
+            font-weight: bold; 
         }
         .form-check-label {
-            font-size: 0.875em; /* Slightly smaller font size for checkbox labels */
+            font-size: 0.875em; 
         }
     </style>
 </head>

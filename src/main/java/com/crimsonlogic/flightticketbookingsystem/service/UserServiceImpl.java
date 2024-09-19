@@ -20,7 +20,6 @@ public class UserServiceImpl implements UserService {
 		return BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 
-	// Assuming you have a method for verifying passwords
 	private boolean checkPassword(String password, String hashedPassword) {
 		return BCrypt.checkpw(password, hashedPassword);
 	}

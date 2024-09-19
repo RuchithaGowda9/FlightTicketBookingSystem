@@ -58,8 +58,6 @@ public class PaymentController {
 		payment.setBooking(booking);
 
 		paymentService.processPayment(payment);
-
-		// Redirect to a new endpoint for generating and downloading the ticket
 		return "redirect:/tickets/generateticket?bookingId=" + bookingId;
 	}
 }

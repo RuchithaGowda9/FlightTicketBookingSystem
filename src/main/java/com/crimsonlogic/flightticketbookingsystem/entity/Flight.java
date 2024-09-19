@@ -53,10 +53,8 @@ public class Flight {
 	private float tripPrice;
 
 	@Column(name = "no_of_seats")
-	private int noOfSeats = 50;
+	private int noOfSeats = 54;
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "flight")
-//	private List<Seat> seats;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "flight")
 	private List<Booking> bookings;
 

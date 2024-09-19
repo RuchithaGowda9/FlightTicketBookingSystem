@@ -147,6 +147,11 @@ html, body {
     color: #ffffff;
     text-decoration: none; 
 }
+.alert alert-success alert-success-custom{
+    width: 400px; /* Set desired width */
+    margin: 0 auto; /* Center the alert */
+    text-align: center; /* Center the text */
+}
 </style>
 </head>
 <body>
@@ -154,7 +159,7 @@ html, body {
     <div id="sidebar" class="sidebar">
         <a href="${pageContext.request.contextPath}/flight/add"><i class="fas fa-plus"></i>Schedule Flight</a>
         <a href="${pageContext.request.contextPath}/flight/viewflights"><i class="fas fa-calendar-alt"></i>Manage Flight Schedule</a> 
-        <a href="${pageContext.request.contextPath}/user/viewBooking"><i class="fas fa-book"></i>View Flight Bookings</a>
+        <a href="${pageContext.request.contextPath}/bookings/viewbookings"><i class="fas fa-book"></i>View Flight Bookings</a>
     </div>
 
     <!-- Navbar -->
@@ -207,8 +212,9 @@ html, body {
                             <p><i class="fas fa-clock"></i> Departure Time: ${flight.departureTime}</p>
                             <p><i class="fas fa-clock"></i> Arrival Time: ${flight.arrivalTime}</p>                    
                             <p><i class="fas fa-money-bill"></i> Trip Price: Rs ${flight.tripPrice}</p>                    
-                            <p>Status: ${flight.status}</p>
+                            <p>Status: ${flight.status}</p>                            
                             <a href="${pageContext.request.contextPath}/flight/update/${flight.flightId}" class="btn btn-update">Update</a>
+                            <a href="${pageContext.request.contextPath}/flight/passengers/${flight.flightId}" class="btn btn-update">View Passenger List</a>                           
                         </div>
                         <div class="flight-image">
                             <img src="https://cdn-icons-png.flaticon.com/512/7022/7022557.png" alt="Flight Icon">

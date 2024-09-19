@@ -120,10 +120,10 @@ html, body {
 <body>
 	<!-- Sidebar -->
 	<div id="sidebar" class="sidebar">
-		<a href="${pageContext.request.contextPath}/flight/add">Schedule Flight</a>
-	    <a href="${pageContext.request.contextPath}/flight/viewflights">Manage Flight Schedule</a> 
-	    <a href="${pageContext.request.contextPath}/user/viewBooking">View Booking</a>
-	</div>
+        <a href="${pageContext.request.contextPath}/flight/add"><i class="fas fa-plus"></i> Schedule Flight</a>
+        <a href="${pageContext.request.contextPath}/flight/viewflights"><i class="fas fa-calendar-alt"></i> Manage Flight Schedule</a>
+        <a href="${pageContext.request.contextPath}/bookings/viewbookings"><i class="fas fa-book"></i> View Booking</a>
+    </div>
 
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark">
@@ -139,10 +139,12 @@ html, body {
 		<span id="sidebarToggle" class="sidebar-toggle fas fa-bars"></span>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/user/admindashboard">Home</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/user/logout">Log Out</a></li>
+				<li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/user/admindashboard"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/user/logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                </li>
 			</ul>
 		</div>
 	</nav>

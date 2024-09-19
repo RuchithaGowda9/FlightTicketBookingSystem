@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crimsonlogic.flightticketbookingsystem.entity.Airport;
+import com.crimsonlogic.flightticketbookingsystem.entity.Booking;
 import com.crimsonlogic.flightticketbookingsystem.entity.User;
 import com.crimsonlogic.flightticketbookingsystem.exception.ResourceNotFoundException;
 import com.crimsonlogic.flightticketbookingsystem.exception.UserAlreadyRegisteredException;
 import com.crimsonlogic.flightticketbookingsystem.service.AirportService;
+import com.crimsonlogic.flightticketbookingsystem.service.BookingService;
 import com.crimsonlogic.flightticketbookingsystem.service.UserService;
 
 @Controller
@@ -33,6 +36,9 @@ public class UserController {
 
 	@Autowired
 	private AirportService airportService;
+
+	@Autowired
+	private BookingService bookingService;
 
 	private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
@@ -132,24 +138,39 @@ public class UserController {
 	}
 
 	@PostMapping("/updateuser/{userid}")
-	public String updateUser(@PathVariable("userid") long userId, User updatedUser, Model model) {
+	public String updateUser(@PathVariable("userid") long userId, User updatedUser,
+			RedirectAttributes redirectAttributes) {
 		try {
 			User existingUser = userService.showUserById(userId);
 			if (existingUser == null) {
 				throw new ResourceNotFoundException("User not found with id: " + userId);
 			}
-
 			updatedUser.setPassword(existingUser.getPassword());
 			existingUser.setFirstName(updatedUser.getFirstName());
 			existingUser.setLastName(updatedUser.getLastName());
 			existingUser.setEmail(updatedUser.getEmail());
 
 			userService.updateUser(userId, existingUser);
-			return "redirect:/user/edituser/" + userId + "?updated";
+
+			redirectAttributes.addFlashAttribute("successMessage", "User details updated successfully!");
+			return "redirect:/user/edituser/" + userId;
 		} catch (ResourceNotFoundException e) {
-			model.addAttribute("error", e.getMessage());
+			// model.addAttribute("error", e.getMessage());
 			return "error";
 		}
+	}
+
+	@GetMapping("/bookinghistory")
+	public String getBookingHistory(HttpSession session, Model model) {
+		User user = (User) session.getAttribute("user");
+
+		if (user == null) {
+			return "redirect:/user/login";
+		}
+		List<Booking> bookings = bookingService.getBookingsByUserId(user.getUserId());
+		model.addAttribute("bookings", bookings);
+		model.addAttribute("currentTime", System.currentTimeMillis());
+		return "bookingHistory";
 	}
 
 	@GetMapping("/logout")

@@ -7,4 +7,6 @@ import com.crimsonlogic.flightticketbookingsystem.entity.PassengerDetails;
 
 @Repository
 public interface PassengerDetailsRepository extends JpaRepository<PassengerDetails, Long> {
+//	@Query("SELECT pd FROM PassengerDetails pd WHERE pd.flight.flightId = :flightId")
+//	List<PassengerDetails> findPassengerDetailsByFlightId(@Param("flightId") Long flightId);
 }

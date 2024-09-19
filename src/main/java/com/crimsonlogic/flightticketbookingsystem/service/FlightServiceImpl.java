@@ -26,6 +26,9 @@ public class FlightServiceImpl implements FlightService {
 	private FlightRepository flightRepository;
 
 	@Autowired
+	private FlightService flightService;
+
+	@Autowired
 	AirportService airportService;
 
 	@PersistenceContext
@@ -35,12 +38,15 @@ public class FlightServiceImpl implements FlightService {
 
 	@Override
 	public void addFlight(String flightNumber, Long departureAirportId, Long arrivalAirportId, String departureTime,
-			String arrivalTime, String status) throws Exception {
+			String arrivalTime, String status) throws FlightConflictException {
 		Optional<Airport> departureAirportOpt = airportService.getAirportById(departureAirportId);
 		Optional<Airport> arrivalAirportOpt = airportService.getAirportById(arrivalAirportId);
-
+		Optional<Flight> existingFlight = flightService.getFlightByNumber(flightNumber);
+		if (existingFlight.isPresent()) {
+			throw new FlightConflictException("Flight number already exists");
+		}
 		if (!departureAirportOpt.isPresent() || !arrivalAirportOpt.isPresent()) {
-			throw new Exception("One or more airports not found.");
+			throw new FlightConflictException("One or more airports not found.");
 		}
 
 		Flight flight = new Flight();
@@ -66,6 +72,15 @@ public class FlightServiceImpl implements FlightService {
 			throw new FlightConflictException("Distance not found between given airports");
 		}
 		return distance * PRICE_PER_KM;
+	}
+
+	@Transactional
+	@Override
+	public void updateFlightSeats(Long flightId, int newSeatCount) throws ResourceNotFoundException {
+		Flight flight = flightRepository.findById(flightId)
+				.orElseThrow(() -> new ResourceNotFoundException("Flight not found with id " + flightId));
+		flight.setNoOfSeats(newSeatCount);
+		flightRepository.save(flight);
 	}
 
 	@Override
@@ -95,74 +110,6 @@ public class FlightServiceImpl implements FlightService {
 	public Optional<Flight> getFlightByNumber(String flightNumber) {
 		return flightRepository.findByFlightNumber(flightNumber);
 	}
-
-	@Transactional
-	@Override
-	public void updateFlightSeats(Long flightId, int noOfSeats) {
-		Flight flight = flightRepository.findById(flightId).orElseThrow(() -> new RuntimeException("Flight not found"));
-		flight.setNoOfSeats(noOfSeats);
-		entityManager.merge(flight); // This updates the Flight entity
-	}
-
-	/*
-	 * @Transactional
-	 * 
-	 * @Override public boolean updateSeatAvailability(String flightNumber,
-	 * List<String> seatNumbers, boolean isAvailable) { Optional<Flight> flightOpt =
-	 * flightRepository.findByFlightNumber(flightNumber); if
-	 * (!flightOpt.isPresent()) { return false; // Flight not found }
-	 * 
-	 * Flight flight = flightOpt.get();
-	 * 
-	 * for (String seatNumber : seatNumbers) { Optional<Seat> seatOpt =
-	 * flight.getSeats().stream().filter(s -> s.getSeatNumber().equals(seatNumber))
-	 * .findFirst(); if (!seatOpt.isPresent() || !seatOpt.get().getIsAvailable()) {
-	 * return false; // Seat is not available } }
-	 * 
-	 * // If all seats are available, update their availability for (String
-	 * seatNumber : seatNumbers) { Optional<Seat> seatOpt =
-	 * flight.getSeats().stream().filter(s -> s.getSeatNumber().equals(seatNumber))
-	 * .findFirst(); if (seatOpt.isPresent()) { Seat seat = seatOpt.get();
-	 * seat.setIsAvailable(isAvailable); seatRepository.save(seat); // Save each
-	 * updated seat } }
-	 * 
-	 * return true; }
-	 * 
-	 * @Transactional
-	 * 
-	 * @Override public boolean reserveSeats(String flightNumber, List<String>
-	 * seatNumbers, int numberOfPassengers) { Optional<Flight> flightOpt =
-	 * flightRepository.findByFlightNumber(flightNumber); if (flightOpt.isEmpty()) {
-	 * return false; // Flight not found }
-	 * 
-	 * Flight flight = flightOpt.get();
-	 * 
-	 * if (seatNumbers.size() != numberOfPassengers) { return false; // Number of
-	 * seats does not match the number of passengers }
-	 * 
-	 * // Get the list of seats for the flight List<Seat> seats = flight.getSeats();
-	 * 
-	 * // Map seat numbers to seats for fast lookup Map<String, Seat> seatMap =
-	 * seats.stream().collect(Collectors.toMap(Seat::getSeatNumber, seat -> seat));
-	 * 
-	 * // Check if all requested seats are available for (String seatNumber :
-	 * seatNumbers) { Seat seat = seatMap.get(seatNumber); if (seat == null ||
-	 * !seat.getIsAvailable()) { return false; // Seat is not available } }
-	 * 
-	 * // Reserve seats List<Seat> seatsToUpdate = new ArrayList<>(); for (String
-	 * seatNumber : seatNumbers) { Seat seat = seatMap.get(seatNumber); if (seat !=
-	 * null) { seat.setIsAvailable(false); // Set seat to unavailable
-	 * seatsToUpdate.add(seat); // Collect seats to update } }
-	 * 
-	 * // Update flight's available seats
-	 * flight.setAvailableSeats(flight.getAvailableSeats() - numberOfPassengers);
-	 * 
-	 * // Save all changes seatRepository.saveAll(seatsToUpdate); // Save all
-	 * updated seats in one batch flightRepository.save(flight); // Save the updated
-	 * flight
-	 * 
-	 * return true; }
-	 */
 
 	@Override
 	public Flight getFlightById(Long flightId) throws ResourceNotFoundException {

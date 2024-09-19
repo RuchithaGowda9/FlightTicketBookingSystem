@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.crimsonlogic.flightticketbookingsystem.entity.Booking;
 import com.crimsonlogic.flightticketbookingsystem.entity.Flight;
+import com.crimsonlogic.flightticketbookingsystem.entity.PassengerDetails;
 import com.crimsonlogic.flightticketbookingsystem.entity.User;
 
 public interface BookingService {
@@ -26,5 +27,14 @@ public interface BookingService {
 	void deleteBooking(Long id);
 
 	Booking saveBookings(String seatNumbers, User user, Flight flight, int noOfPassengers);
+
+	public List<Booking> getBookingsByUserId(Long userId);
+
+	List<PassengerDetails> getPassengersByFlightId(Long flightId);
+
+	void cancelBooking(Long bookingId);
+
+	// Booking saveBookings(String seatNumbers, User user, Flight flight, int
+	// noOfPassengers, Map<String, String> params);
 
 }

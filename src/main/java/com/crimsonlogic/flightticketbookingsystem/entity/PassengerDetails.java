@@ -36,6 +36,10 @@ public class PassengerDetails {
 //	@JoinColumn(name = "flight_id", foreignKey = @ForeignKey(name = "flight_id_fk"))
 //	private Flight flight;
 
+	@ManyToOne
+	@JoinColumn(name = "booking_id", foreignKey = @ForeignKey(name = "booking_id_fk"))
+	private Booking booking;
+
 	@Column(name = "first_name", length = 50)
 	private String firstName;
 
@@ -50,4 +54,5 @@ public class PassengerDetails {
 
 	@Column(name = "gender")
 	private String gender;
+
 }

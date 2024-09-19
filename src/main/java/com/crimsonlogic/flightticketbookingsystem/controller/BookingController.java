@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,10 +94,8 @@ public class BookingController {
 				lastBooking = bookingService.saveBookings(seatNumber, user, flight, noOfPassengers);
 			}
 
-			// Calculate the total amount
 			Float amount = flight.getTripPrice() * seatNumbers.size();
 
-			// Return the redirect URL with correct format specifiers
 			return String.format(
 					"redirect:/payments/paymentform?bookingId=%d&flightId=%d&seatsBooked=%s&noOfPassengers=%d&amount=%f",
 					lastBooking.getBookingId(), flightId, String.join(",", seatNumbers), noOfPassengers, amount);
@@ -105,6 +104,19 @@ public class BookingController {
 			redirectAttributes.addFlashAttribute("error", "An error occurred while processing your request.");
 			return "redirect:/error";
 		}
+	}
+
+	@GetMapping("/viewbookings")
+	public String viewBookings(Model model) {
+		List<Booking> bookings = bookingService.getAllBookings();
+		model.addAttribute("bookings", bookings);
+		return "viewBookings";
+	}
+
+	@PostMapping("/cancel/{bookingId}")
+	public String cancelBooking(@PathVariable Long bookingId) {
+		bookingService.cancelBooking(bookingId);
+		return "redirect:/user/bookinghistory";
 	}
 
 }

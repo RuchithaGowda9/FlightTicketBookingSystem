@@ -6,18 +6,16 @@ import java.util.List;
 import java.util.Optional;
 
 import com.crimsonlogic.flightticketbookingsystem.entity.Flight;
+import com.crimsonlogic.flightticketbookingsystem.exception.FlightConflictException;
 import com.crimsonlogic.flightticketbookingsystem.exception.ResourceNotFoundException;
 
 public interface FlightService {
 	void addFlight(String flightNumber, Long departureAirportId, Long arrivalAirportId, String departureTime,
-			String arrivalTime, String status) throws Exception;
+			String arrivalTime, String status) throws FlightConflictException;
 
 	void saveFlight(Flight flight);
 
 	boolean flightExists(String flightNumber);
-
-	void updateFlight(Long id, LocalDateTime departureTime, LocalDateTime arrivalTime, String status, Float tripPrice)
-			throws ResourceNotFoundException;
 
 	float calculateTripPrice(String departureAirportName, String arrivalAirportName);
 
@@ -27,10 +25,7 @@ public interface FlightService {
 
 	Optional<Flight> getFlightByNumber(String flightNumber);
 
-//	boolean reserveSeats(String flightNumber, List<String> seatNumbers, int numberOfPassengers);
-
-	// boolean updateSeatAvailability(String flightNumber, String seatNumber,
-	// boolean isAvailable);
+	void updateFlightSeats(Long flightId, int newSeatCount) throws ResourceNotFoundException;
 
 	Flight getFlightById(Long flightId) throws ResourceNotFoundException;
 
@@ -38,7 +33,7 @@ public interface FlightService {
 
 	Flight findById(Long id);
 
-	void updateFlightSeats(Long flightId, int noOfSeats);
+	void updateFlight(Long id, LocalDateTime departureDateTime, LocalDateTime arrivalDateTime, String status,
+			Float tripPrice) throws ResourceNotFoundException;
 
-//	boolean updateSeatAvailability(String flightNumber, List<String> seatNumbers, boolean isAvailable);
 }

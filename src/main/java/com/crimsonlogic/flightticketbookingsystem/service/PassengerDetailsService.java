@@ -18,4 +18,6 @@ public interface PassengerDetailsService {
 	List<PassengerDetails> getAllPassengerDetails();
 
 	void deletePassengerDetails(Long id);
+
+//	List<PassengerDetails> getPassengersByFlightId(Long flightId);
 }
